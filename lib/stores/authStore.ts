@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { AuthStore } from "@/types/store/auth-store";
 import { ADMIN_EMAILS } from "@/lib/constants/admin-emails";
+import { auth, googleProvider } from "@/lib/firebase/config";
+import { signInWithPopup } from "firebase/auth";
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
   user: null,
@@ -18,6 +20,12 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       if (res.ok) {
         const user = await res.json();
          if (!ADMIN_EMAILS.includes(user.email)) {
+  set({
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+  });
+
   throw new Error("Unauthorized");
 }
         set({
@@ -63,6 +71,39 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
     await get().fetchProfile();
   },
+
+  loginWithGoogle: async () => {
+  try {
+    const result = await signInWithPopup(
+      auth,
+      googleProvider
+    );
+
+    const idToken = await result.user.getIdToken();
+
+    const res = await fetch("/api/auth/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idToken,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error);
+    }
+
+    await get().fetchProfile();
+  } catch (error: any) {
+    throw new Error(
+      error.message || "Google login failed"
+    );
+  }
+},
 
   logout: async () => {
     await fetch("/api/auth/logout", {
