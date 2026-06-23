@@ -1,11 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/stores/authStore";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+const router = useRouter();
 
+const login = useAuthStore((s) => s.login);
+
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState("");
+
+const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
+
+  try {
+    setError("");
+    setIsLoading(true);
+
+    await login(email, password);
+
+    router.push("/dashboard");
+  } catch (err: any) {
+    setError(err.message || "Login failed");
+  } finally {
+    setIsLoading(false);
+  }
+};
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-sm">
@@ -19,7 +45,10 @@ export default function SignInPage() {
           </p>
         </div>
 
-        <form className="space-y-4">
+       <form
+  onSubmit={handleSubmit}
+  className="space-y-4"
+>
           <div>
             <label className="mb-2 block text-sm font-medium">
               Email
@@ -48,11 +77,17 @@ export default function SignInPage() {
             />
           </div>
 
+{error && (
+  <p className="text-sm text-red-500">
+    {error}
+  </p>
+)}
+
           <button
             type="submit"
             className="w-full rounded-xl bg-primary py-3 text-primary-foreground font-medium"
           >
-            Sign In
+            {isLoading ? "Signing In..." : "Sign In"}
           </button>
         </form>
       </div>

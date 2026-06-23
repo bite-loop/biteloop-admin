@@ -11,6 +11,6 @@ export interface AuthStore {
   ) => Promise<void>;
 
   logout: () => Promise<void>;
-
+  loginWithGoogle: () => Promise<void>;
   fetchProfile: () => Promise<void>;
 }

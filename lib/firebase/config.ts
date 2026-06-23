@@ -21,4 +21,7 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 const functions = getFunctions(app);
 const googleProvider = new GoogleAuthProvider()
+
+console.log("Firebase Project:", process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID);
+
 export { app, auth, db, storage, functions, googleProvider };

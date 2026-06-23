@@ -14,6 +14,12 @@ export async function POST(request: Request) {
       );
     }
 
+    console.log("Email:", email);
+console.log(
+  "Project:",
+  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+);
+
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
