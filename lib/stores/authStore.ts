@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AuthStore } from "@/app/types/store/auth-store";
+import { AuthStore } from "@/types/store/auth-store";
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
   user: null,
