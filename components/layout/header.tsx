@@ -1,4 +1,17 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/lib/stores/authStore";
+
 export default function Header() {
+  const router = useRouter();
+  const logout = useAuthStore((s) => s.logout);
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/sign-in");
+  };
+
   return (
     <header className="flex h-16 items-center justify-between border-b border-border bg-background px-6">
       <div>
@@ -7,9 +20,12 @@ export default function Header() {
         </h2>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-full bg-red-500" />
-      </div>
+      <button
+        onClick={handleLogout}
+        className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-accent"
+      >
+        Logout
+      </button>
     </header>
   );
 }

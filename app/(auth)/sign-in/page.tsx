@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/stores/authStore";
+import { useEffect } from "react";
+
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -13,6 +15,19 @@ const login = useAuthStore((s) => s.login);
 
 const [isLoading, setIsLoading] = useState(false);
 const [error, setError] = useState("");
+
+const user = useAuthStore((s) => s.user);
+const fetchProfile = useAuthStore((s) => s.fetchProfile);
+
+useEffect(() => {
+  fetchProfile();
+}, [fetchProfile]);
+
+useEffect(() => {
+  if (user) {
+    router.replace("/dashboard");
+  }
+}, [user, router]);
 
 const handleSubmit = async (
   e: React.FormEvent<HTMLFormElement>

@@ -1,215 +1,162 @@
-# 🛠️ BiteLoop Admin Panel
+# 🛠️ BITELOOP ADMIN — Command Center
+
+<p align="center">
+  <b>Monitor • Moderate • Manage • Scale</b>
+</p>
 
 <div align="center">
-
-# 🍔 BiteLoop Admin
-
-### The centralized control center for the BiteLoop ecosystem
-
-Manage restaurants, users, orders, support operations, analytics, promotions, and platform-wide settings from a single powerful dashboard.
-
----
-
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge\&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge\&logo=tailwindcss\&logoColor=white)
-![Shadcn UI](https://img.shields.io/badge/Shadcn_UI-000000?style=for-the-badge)
-![Zustand](https://img.shields.io/badge/Zustand-593D88?style=for-the-badge)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge\&logo=firebase)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb)
-
+  <img width="1200" src="./public/banner2.png" alt="biteloop-admin-banner" />
 </div>
 
 ---
 
-## 🚀 About
+# 🎯 About BiteLoop Admin
 
-BiteLoop Admin is the platform management dashboard for the BiteLoop ecosystem.
+BiteLoop Admin serves as the operational headquarters of the entire BiteLoop ecosystem.
 
-BiteLoop is a modern food delivery platform inspired by **Uber Eats**, **DoorDash**, and **Swiggy**.
+Built for platform administrators, support teams, and operations managers, it provides complete visibility and control over restaurants, users, orders, growth initiatives, and platform-wide activities.
 
-The ecosystem currently consists of:
-
-### 👥 Customer Application
-
-* Browse restaurants
-* Explore menus
-* Add items to cart
-* Checkout & payments
-* Order tracking
-* Profile & address management
-
-### 🏪 Restaurant Dashboard
-
-* Restaurant onboarding
-* Menu management
-* Order management
-* Business analytics
-* Revenue tracking
-
-### 🛠️ Admin Dashboard
-
-* Platform-wide monitoring
-* Restaurant approval & moderation
-* User management
-* Order supervision
-* Revenue analytics
-* Support operations
-* Coupon management
-* System configuration
+- 📊 Monitor platform performance
+- 🏪 Manage restaurant partners
+- 👥 Oversee customer accounts
+- 📦 Track order operations
+- 🎫 Resolve support issues
+- 🎁 Drive growth initiatives
+- ⚙️ Control platform settings
 
 ---
 
-# ✨ Features
+# 🧠 Core Operations
 
-## 📊 Dashboard
+### 📊 Platform Intelligence
 
-* Platform Overview
-* Revenue Metrics
-* Order Metrics
-* User Growth
-* Restaurant Growth
-* Real-time Activity Feed
+Track the health and performance of the platform in real time.
 
----
-
-## 🏪 Restaurant Management
-
-* Approve Restaurants
-* Reject Applications
-* Suspend Restaurants
-* Reactivate Restaurants
-* Restaurant Analytics
-* Menu Monitoring
-* Verification Management
+- Revenue Analytics
+- Growth Monitoring
+- User Activity Insights
+- Operational Metrics
+- Platform Health Tracking
 
 ---
 
-## 👤 User Management
+### 🏪 Restaurant Administration
 
-* User Directory
-* Account Monitoring
-* User Suspension
-* User Restoration
-* Address Management
-* Order History Access
+Manage restaurant partners throughout their lifecycle.
 
----
-
-## 📦 Order Management
-
-* View All Orders
-* Monitor Live Orders
-* Status Tracking
-* Order Analytics
-* Order Investigation Tools
+- Restaurant Approvals
+- Verification Management
+- Menu Moderation
+- Performance Analytics
+- Compliance Controls
 
 ---
 
-## 🎫 Support Center
+### 👥 User Administration
 
-* Ticket Management
-* Customer Issues
-* Restaurant Issues
-* Refund Requests
-* Escalation Handling
+Tools for managing and supporting platform users.
 
----
-
-## 📈 Analytics
-
-* Revenue Analytics
-* Order Analytics
-* User Analytics
-* Restaurant Analytics
-* Business Insights
+- User Directory
+- Account Monitoring
+- Suspension Controls
+- Order History Access
+- Loyalty Program Oversight
 
 ---
 
-## 🎁 Promotions
+### 📦 Order Operations
 
-* Coupon Management
-* Campaign Creation
-* Discount Monitoring
-* Performance Tracking
+Complete visibility into order activity across the platform.
 
----
-
-## 🔐 Roles & Permissions
-
-### Super Admin
-
-Full Platform Access
-
-### Operations Admin
-
-Restaurant & Order Management
-
-### Support Admin
-
-Customer Support Operations
-
-### Analytics Admin
-
-Platform Analytics Access
+- Live Order Monitoring
+- Order Lifecycle Tracking
+- Refund Investigations
+- Escalation Management
+- Operational Reporting
 
 ---
 
-# 🏗️ Tech Stack
+### 🎫 Support & Moderation
 
-## Frontend
+Deliver efficient support and maintain platform quality.
 
-* Next.js (App Router)
-* TypeScript
-* Tailwind CSS
-* Shadcn UI
-* Framer Motion
-* Lucide React
-
-## State Management
-
-* Zustand
-
-## Authentication
-
-* Firebase Authentication
-
-## Database
-
-* MongoDB
+- Ticket Management
+- Customer Support
+- Restaurant Support
+- Moderation Tools
+- Escalation Workflows
 
 ---
 
-# 🎯 Project Vision
+### 🎁 Promotions & Growth
 
-Our goal is to build a modern, scalable, enterprise-grade administration platform capable of managing every aspect of the BiteLoop ecosystem.
+Launch campaigns and accelerate platform growth.
 
-Inspired by:
-
-* Stripe Dashboard
-* Vercel Dashboard
-* Shopify Admin
-* Linear
-* Uber Eats Admin
+- Coupon Management
+- Campaign Creation
+- Discount Monitoring
+- Promotion Analytics
+- Growth Operations
 
 ---
 
-# 🌟 Future Roadmap
+### ⚙️ Platform Controls
 
-* Delivery Partner Management
-* Real-Time Monitoring
-* AI Analytics Assistant
-* Fraud Detection
-* Automated Refund Processing
-* Multi-City Operations
-* Multi-Country Support
+Centralized administration and configuration.
+
+- System Settings
+- Notification Controls
+- Role Management
+- Access Permissions
+- Platform Configuration
 
 ---
 
-<div align="center">
+# 🏗️ Administrative Ecosystem
 
-### Built with ❤️ for the BiteLoop Ecosystem
+```text
+                    BITELOOP ADMIN
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+        ▼                  ▼                  ▼
 
-**Customer App • Restaurant Dashboard • Admin Platform**
+   Restaurants         Users             Orders
+        │                  │                  │
+        ▼                  ▼                  ▼
 
-</div>
+ Verification      Monitoring      Live Tracking
+ Moderation        Support         Refund Tools
+ Analytics         Management      Reporting
+
+        └──────────────────┼──────────────────┘
+                           │
+                           ▼
+
+                    Platform Control
+
+                 Analytics • Growth
+                 Support • Moderation
+                 Configuration
+```
+
+---
+
+# 🚀 Future Expansion
+
+- 🤖 AI Analytics Assistant
+- 🛡️ Fraud Detection System
+- 🚚 Delivery Partner Management
+- ⚡ Real-Time Operations Center
+- 💳 Automated Refund Processing
+- 🌍 Multi-City Infrastructure
+- 🌎 Multi-Country Expansion
+- 📈 Predictive Business Intelligence
+
+---
+
+# 🌟 Vision
+
+BiteLoop Admin is designed to become the central nervous system of the BiteLoop ecosystem — providing the tools, intelligence, and operational control required to scale food delivery operations across cities, regions, and eventually global markets.
+
+---
