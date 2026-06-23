@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { AuthStore } from "@/types/store/auth-store";
+import { ADMIN_EMAILS } from "@/lib/constants/admin-emails";
 
 export const useAuthStore = create<AuthStore>((set, get) => ({
   user: null,
@@ -16,7 +17,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
       if (res.ok) {
         const user = await res.json();
-
+         if (!ADMIN_EMAILS.includes(user.email)) {
+  throw new Error("Unauthorized");
+}
         set({
           user,
           isAuthenticated: true,
