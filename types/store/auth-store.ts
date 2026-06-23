@@ -1,4 +1,4 @@
-import { AdminUser } from "@/app/types/admin-user"
+import { AdminUser } from "@/types/admin-user"
 
 export interface AuthStore {
   user: AdminUser | null;
