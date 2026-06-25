@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import {
+  UserRound,
   Mail,
+  BriefcaseBusiness,
   Lock,
-  Eye,
-  EyeOff,
   ShieldCheck,
 } from "lucide-react";
 import GoogleSignInButton from "./google-signin-button";
@@ -22,12 +22,16 @@ const bodyFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-export default function LoginForm() {
+export default function SignupForm() {
   const router = useRouter();
 
   const login = useAuthStore((s) => s.login);
 
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+const [jobTitle, setJobTitle] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+const [acceptTerms, setAcceptTerms] = useState(false);
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] =
@@ -38,7 +42,7 @@ export default function LoginForm() {
 
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (
+  const handleSignup = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
@@ -109,50 +113,95 @@ export default function LoginForm() {
 
         <div className="mt-16 text-center">
           <h1 className={`${headingFont.className} text-5xl font-extrabold tracking-tight`}>
-            Welcome Back!
+            Create Account
           </h1>
 
           <p className={`${bodyFont.className} mt-4 text-base text-red-100/90`}>
-            Sign in to continue to your admin dashboard
+            Create your BiteLoop Admin account
           </p>
         </div>
 
         {/* Form */}
 
         <form
-          onSubmit={handleLogin}
-          className="mt-16 space-y-5"
+          onSubmit={handleSignup}
+          className="mt-12 space-y-4"
         >
+            <div className="relative">
+  <UserRound
+    size={18}
+    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
+  />
+
+  <input
+    type="text"
+    placeholder="Full Name"
+    value={fullName}
+    onChange={(e) => setFullName(e.target.value)}
+    className={`${bodyFont.className}
+h-12
+w-full
+rounded-xl
+bg-white/95
+pl-12
+pr-4
+text-sm
+font-medium
+text-neutral-900
+placeholder:text-neutral-400
+shadow-sm
+outline-none
+transition-all
+duration-300
+focus:bg-white
+focus:ring-4
+focus:ring-white/25`}
+  />
+</div>
 
           {/* Email */}
 
           <div className="relative">
 
             <Mail
-              size={24}
-              className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-500"
+              size={18}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
             />
 
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Work email"
               value={email}
               onChange={(e) =>
                 setEmail(e.target.value)
               }
-              className={`${bodyFont.className} h-14 w-full rounded-2xl bg-white/95 pl-14 pr-6 text-[15px] font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
+              className={`${bodyFont.className} h-11 w-full rounded-2xl bg-white/95 pl-12 pr-6 text-sm font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
             />
 
           </div>
 
+<div className="relative">
+  <BriefcaseBusiness
+    size={18}
+    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
+  />
+
+  <input
+    type="text"
+    placeholder="Current Role"
+    value={jobTitle}
+    onChange={(e) => setJobTitle(e.target.value)}
+    className={`${bodyFont.className} h-11 w-full rounded-2xl bg-white/95 pl-12 pr-6 text-sm font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
+  />
+</div>
+
           {/* Password */}
 
           <div className="relative">
-
-            <Lock
-              size={24}
-              className="absolute left-6 top-1/2 -translate-y-1/2 text-neutral-500"
-            />
+<Lock
+  size={18}
+  className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
+/>
 
             <input
               type={
@@ -160,12 +209,12 @@ export default function LoginForm() {
                   ? "text"
                   : "password"
               }
-              placeholder="Password"
+              placeholder="Create password"
               value={password}
               onChange={(e) =>
                 setPassword(e.target.value)
               }
-              className="h-16 w-full rounded-2xl bg-white pl-16 pr-16 text-lg text-black outline-none"
+              className={`${bodyFont.className} h-11 w-full rounded-2xl bg-white/95 pl-12 pr-14 text-sm font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
             />
 
             <button
@@ -175,41 +224,64 @@ export default function LoginForm() {
               }
               className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-500"
             >
-<span className="text-2xl">
+<span className="text-xl">
   {showPassword ? "🍔" : "🛎️"}
 </span>
             </button>
 
           </div>
 
-          {/* Remember */}
+<div className="relative">
+  <ShieldCheck
+    size={18}
+    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
+  />
 
-          <div className="flex items-center justify-between">
-
-            <label className="flex items-center gap-3 text-lg">
-
-              <input
-                checked={rememberMe}
-                onChange={() =>
-                  setRememberMe(!rememberMe)
-                }
-                type="checkbox"
-                className={`${bodyFont.className} flex items-center gap-3 text-sm font-medium`}
-              />
-
-              Remember me
-
-            </label>
-
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Confirm Password"
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+    className={`${bodyFont.className}  h-11 w-full rounded-2xl bg-white/95 pl-12 pr-14 text-sm font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
+  />
             <button
               type="button"
-              className={`${bodyFont.className} text-sm font-medium hover:underline`}
+              onClick={() =>
+                setShowPassword(!showPassword)
+              }
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-500"
             >
-              Forgot password?
-            </button>
+<span className="text-xl">
+  {showPassword ? "🍔" : "🛎️"}
+</span>
+</button>
+</div>
 
-          </div>
+<label className={`${bodyFont.className} flex items-center gap-3 text-sm`}>
+  <input
+    type="checkbox"
+    checked={acceptTerms}
+    onChange={() => setAcceptTerms(!acceptTerms)}
+    className="h-4 w-4 rounded"
+  />
 
+  <span>
+    I agree to the{" "}
+    <button
+      type="button"
+      className="font-semibold underline"
+    >
+      Terms
+    </button>{" "}
+    &{" "}
+    <button
+      type="button"
+      className="font-semibold underline"
+    >
+      Privacy Policy
+    </button>
+  </span>
+</label>
           {/* Login */}
 
           <button
@@ -217,8 +289,8 @@ export default function LoginForm() {
 className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-red-500 to-red-400 text-lg font-semibold shadow-[0_10px_40px_rgba(255,80,80,.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_60px_rgba(255,80,80,.45)] active:scale-[0.99]`}
           >
             {loading
-              ? "Looging In..."
-              : "LOGIN"}
+              ? "Creating Account..."
+              : "CREATE ACCOUNT"}
           </button>
 
           {/* Divider */}
@@ -238,6 +310,17 @@ className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-
           {/* Google */}
 
           <GoogleSignInButton />
+
+<div className={`${bodyFont.className} text-center text-sm text-red-100/90`}>
+  Already have an account?{" "}
+  <button
+    type="button"
+    onClick={() => router.push("/login")}
+    className="font-semibold text-white underline underline-offset-4 hover:text-red-200"
+  >
+    Login
+  </button>
+</div>
 
         </form>
 
