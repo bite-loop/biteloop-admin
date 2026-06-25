@@ -96,7 +96,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-   <aside className="flex h-screen w-72 flex-col border-r border-border bg-background">
+   <aside className="flex h-screen w-59 flex-col border-r border-border bg-background">
 <div className="flex h-20 items-center border-b border-border px-6">
   <AdminLogo />
 </div>
