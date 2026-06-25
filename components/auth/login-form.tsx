@@ -217,8 +217,8 @@ export default function LoginForm() {
 className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-red-500 to-red-400 text-lg font-semibold shadow-[0_10px_40px_rgba(255,80,80,.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_60px_rgba(255,80,80,.45)] active:scale-[0.99]`}
           >
             {loading
-              ? "Signing In..."
-              : "Sign In"}
+              ? "Looging In..."
+              : "LOGIN"}
           </button>
 
           {/* Divider */}
