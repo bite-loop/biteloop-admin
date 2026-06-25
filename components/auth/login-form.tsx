@@ -11,7 +11,17 @@ import {
 import GoogleSignInButton from "./google-signin-button";
 import { useAuthStore } from "@/lib/stores/authStore";
 import { useRouter } from "next/navigation";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
+const headingFont = Manrope({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+});
+
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 export default function LoginForm() {
   const router = useRouter();
 
@@ -47,7 +57,7 @@ export default function LoginForm() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-red-700 via-red-600 to-red-500 backdrop-blur-xl from-red-700 via-red-600 to-red-500 p-10 text-white lg:p-14">
+<section className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-br from-[#C8102E] via-[#D9142F] to-[#E41E3F] px-14 py-10 text-white">
 
       {/* Decorative Top Curve */}
 
@@ -85,24 +95,24 @@ export default function LoginForm() {
 
         <div className="flex items-center justify-between">
 <img
-  src="/logo-white.png"
+  src="/new-logo.png"
   alt="BiteLoop"
-  className="h-14 w-auto"
+  className="h-11 w-auto"
 />
 
-          <span className="text-xl font-bold tracking-widest">
+          <span className={`${bodyFont.className} text-sm font-medium uppercase tracking-[0.35em] text-red-100`}>
             ADMIN PORTAL
           </span>
         </div>
 
         {/* Title */}
 
-        <div className="mt-24 text-center">
-          <h1 className="text-6xl font-black">
+        <div className="mt-16 text-center">
+          <h1 className={`${headingFont.className} text-5xl font-extrabold tracking-tight`}>
             Welcome Back!
           </h1>
 
-          <p className="mt-5 text-2xl text-red-100">
+          <p className={`${bodyFont.className} mt-4 text-base text-red-100/90`}>
             Sign in to continue to your admin dashboard
           </p>
         </div>
@@ -111,7 +121,7 @@ export default function LoginForm() {
 
         <form
           onSubmit={handleLogin}
-          className="mt-16 space-y-6"
+          className="mt-16 space-y-5"
         >
 
           {/* Email */}
@@ -130,7 +140,7 @@ export default function LoginForm() {
               onChange={(e) =>
                 setEmail(e.target.value)
               }
-              className="h-16 w-full rounded-2xl bg-white pl-16 pr-6 text-lg text-black outline-none"
+              className={`${bodyFont.className} h-14 w-full rounded-2xl bg-white/95 pl-14 pr-6 text-[15px] font-medium text-neutral-900 shadow-sm outline-none transition-all duration-300 placeholder:text-neutral-400 focus:bg-white focus:ring-4 focus:ring-white/25`}
             />
 
           </div>
@@ -165,11 +175,9 @@ export default function LoginForm() {
               }
               className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-500"
             >
-              {showPassword ? (
-                <EyeOff size={24} />
-              ) : (
-                <Eye size={24} />
-              )}
+<span className="text-2xl">
+  {showPassword ? "🍔" : "🛎️"}
+</span>
             </button>
 
           </div>
@@ -186,7 +194,7 @@ export default function LoginForm() {
                   setRememberMe(!rememberMe)
                 }
                 type="checkbox"
-                className="h-5 w-5 rounded"
+                className={`${bodyFont.className} flex items-center gap-3 text-sm font-medium`}
               />
 
               Remember me
@@ -195,7 +203,7 @@ export default function LoginForm() {
 
             <button
               type="button"
-              className="font-semibold hover:underline"
+              className={`${bodyFont.className} text-sm font-medium hover:underline`}
             >
               Forgot password?
             </button>
@@ -206,22 +214,7 @@ export default function LoginForm() {
 
           <button
             disabled={loading}
-className="
-h-16
-w-full
-rounded-2xl
-bg-gradient-to-r
-from-red-500
-to-red-400
-text-2xl
-font-bold
-shadow-[0_10px_40px_rgba(255,80,80,.35)]
-transition-all
-duration-300
-hover:-translate-y-1
-hover:shadow-[0_18px_60px_rgba(255,80,80,.45)]
-active:scale-[0.99]
-"
+className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-red-500 to-red-400 text-lg font-semibold shadow-[0_10px_40px_rgba(255,80,80,.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_60px_rgba(255,80,80,.45)] active:scale-[0.99]`}
           >
             {loading
               ? "Signing In..."
@@ -249,32 +242,23 @@ active:scale-[0.99]
         </form>
 
         {/* Footer */}
+<div className="mt-auto flex justify-center pt-8">
+  <div className="flex items-center gap-4">
+    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur-md shadow-lg">
+      <ShieldCheck size={22} />
+    </div>
 
-        <div className="mt-auto flex items-center gap-5 pt-14">
+    <div>
+<p className={`${bodyFont.className} text-base font-semibold`}>
+  Secure admin access only
+</p>
 
-          <div className="rounded-full bg-white/95  transition-all
-duration-300
-focus:ring-4
-focus:ring-white/30
-focus:border-transparent/20 p-3 backdrop-blur">
-
-            <ShieldCheck size={30} />
-
-          </div>
-
-          <div>
-
-            <p className="text-xl font-semibold">
-              Secure admin access only
-            </p>
-
-            <p className="text-red-100">
-              All activities are monitored and logged.
-            </p>
-
-          </div>
-
-        </div>
+<p className={`${bodyFont.className} mt-1 text-sm text-red-100/80`}>
+  All activities are monitored and logged.
+</p>
+    </div>
+  </div>
+</div>
 
       </div>
     </section>
