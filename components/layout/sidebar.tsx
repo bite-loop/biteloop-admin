@@ -16,56 +16,79 @@ import {
 } from "lucide-react";
 import AdminLogo from "./admin-logo";
 
-const navItems = [
+const navSections = [
   {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
+    title: "MAIN",
+    items: [
+      {
+        name: "Dashboard",
+        href: "/dashboard",
+        icon: LayoutDashboard,
+      },
+      {
+        name: "Orders",
+        href: "/orders",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Analytics",
+        href: "/analytics",
+        icon: BarChart3,
+      },
+    ],
   },
+
   {
-    name: "Restaurants",
-    href: "/restaurants",
-    icon: Store,
+    title: "MANAGEMENT",
+    items: [
+      {
+        name: "Restaurants",
+        href: "/restaurants",
+        icon: Store,
+      },
+      {
+        name: "Users",
+        href: "/users",
+        icon: Users,
+      },
+      {
+        name: "Coupons",
+        href: "/coupons",
+        icon: TicketPercent,
+      },
+    ],
   },
+
   {
-    name: "Users",
-    href: "/users",
-    icon: Users,
+    title: "OPERATIONS",
+    items: [
+      {
+        name: "Support",
+        href: "/support",
+        icon: Headset,
+      },
+      {
+        name: "Moderation",
+        href: "/moderation",
+        icon: ShieldAlert,
+      },
+      {
+        name: "Notifications",
+        href: "/notifications",
+        icon: Bell,
+      },
+    ],
   },
+
   {
-    name: "Orders",
-    href: "/orders",
-    icon: ShoppingBag,
-  },
-  {
-    name: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    name: "Support",
-    href: "/support",
-    icon: Headset,
-  },
-  {
-    name: "Moderation",
-    href: "/moderation",
-    icon: ShieldAlert,
-  },
-  {
-    name: "Coupons",
-    href: "/coupons",
-    icon: TicketPercent,
-  },
-  {
-    name: "Notifications",
-    href: "/notifications",
-    icon: Bell,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: Settings,
+    title: "SYSTEM",
+    items: [
+      {
+        name: "Settings",
+        href: "/settings",
+        icon: Settings,
+      },
+    ],
   },
 ];
 
@@ -73,33 +96,45 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r bg-sidebar">
-      <div className="flex h-16 items-center border-b px-6">
-<AdminLogo />
-      </div>
+   <aside className="flex h-screen w-59 flex-col border-r border-border bg-background">
+<div className="flex h-20 items-center border-b border-border px-6">
+  <AdminLogo />
+</div>
+<nav className="flex-1 overflow-y-auto px-4 py-6">
+  {navSections.map((section) => (
+    <div key={section.title} className="mb-8">
+      <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+        {section.title}
+      </p>
 
-      <nav className="space-y-1 p-4">
-        {navItems.map((item) => {
+      <div className="space-y-1">
+        {section.items.map((item) => {
           const Icon = item.icon;
-
           const active = pathname === item.href;
 
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all ${
+              className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
                 active
-                  ? "bg-primary/10 text-primary"
+                  ? "bg-primary text-white shadow-md"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
-              <Icon size={18} />
-              {item.name}
+              <Icon
+                size={18}
+                className="transition-transform group-hover:scale-110"
+              />
+
+              <span>{item.name}</span>
             </Link>
           );
         })}
-      </nav>
+      </div>
+    </div>
+  ))}
+</nav>
     </aside>
   );
 }
