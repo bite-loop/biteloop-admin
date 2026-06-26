@@ -14,7 +14,7 @@ import {
   Bell,
   Settings,
 } from "lucide-react";
-import AdminLogo from "./admin-logo";
+
 
 const navSections = [
   {
@@ -97,9 +97,7 @@ export default function Sidebar() {
 
   return (
    <aside className="flex h-screen w-59 flex-col border-r border-border bg-background">
-<div className="flex h-20 items-center border-b border-border px-6">
-  <AdminLogo />
-</div>
+
 <nav className="flex-1 overflow-y-auto px-4 py-6">
   {navSections.map((section) => (
     <div key={section.title} className="mb-8">

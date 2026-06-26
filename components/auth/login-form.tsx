@@ -221,25 +221,19 @@ className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-
               : "LOGIN"}
           </button>
 
-          {/* Divider */}
-
-          <div className="flex items-center gap-5 py-2">
-
-            <div className="h-px flex-1 bg-red-300" />
-
-            <span className="text-lg">
-              OR
-            </span>
-
-            <div className="h-px flex-1 bg-red-300" />
-
-          </div>
-
-          {/* Google */}
-
-          <GoogleSignInButton />
-
         </form>
+
+          <div className="flex items-center gap-5 py-2"/>
+<div className={`${bodyFont.className} text-center text-sm text-red-100/90`}>
+  Don't have an admin account?{" "}
+  <button
+    type="button"
+    onClick={() => router.push("/sign-up")}
+    className="font-semibold text-white underline underline-offset-4 transition hover:text-red-200"
+  >
+    Create one
+  </button>
+</div>
 
         {/* Footer */}
 <div className="mt-auto flex justify-center pt-8">

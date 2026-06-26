@@ -32,8 +32,8 @@ export async function POST(request: Request) {
     if (!ADMIN_EMAILS.includes(email)) {
       return NextResponse.json(
         {
-          error:
-            "You are not authorized to create an admin account.",
+error:
+  "This email is not authorized for BiteLoop Admin. Please contact the Super Administrator."
         },
         {
           status: 403,
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "An account with this email already exists.",
+            "This administrator account already exists. Please sign in instead.",
         },
         {
           status: 409,
