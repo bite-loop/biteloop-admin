@@ -14,7 +14,7 @@ export async function GET() {
     }
 
     const userDoc = await adminDb
-      .collection("users")
+      .collection("admins")
       .doc(user.uid)
       .get();
 
