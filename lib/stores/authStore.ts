@@ -26,7 +26,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     isLoading: false,
   });
 
-  throw new Error("Unauthorized");
+  throw new Error(
+  "Access denied. You are not authorized to access the BiteLoop Admin Panel."
+);
 }
         set({
           user,
@@ -40,15 +42,18 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           isLoading: false,
         });
       }
-    } catch (error) {
-      console.error(error);
+} catch (error) {
+  console.error(error);
 
-      set({
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
-      });
-    }
+  set({
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+  });
+
+  throw error;
+}
+    
   },
 
   login: async (email, password) => {
