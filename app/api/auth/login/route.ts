@@ -60,14 +60,22 @@ console.log(
   } catch (error: any) {
     console.error("Login error:", error);
 
-    const errorMessages: Record<string, string> = {
-      "auth/user-not-found": "No account found with this email",
-      "auth/wrong-password": "Invalid password",
-      "auth/invalid-email": "Invalid email format",
-      "auth/too-many-requests":
-        "Too many attempts. Please try again later",
-    };
+const errorMessages: Record<string, string> = {
+  "auth/invalid-credential":
+    "Invalid email or password",
 
+  "auth/user-not-found":
+    "No account found with this email",
+
+  "auth/wrong-password":
+    "Invalid password",
+
+  "auth/invalid-email":
+    "Invalid email format",
+
+  "auth/too-many-requests":
+    "Too many attempts. Please try again later",
+};
     return NextResponse.json(
       {
         error: errorMessages[error.code] || "Login failed",

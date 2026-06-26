@@ -21,9 +21,9 @@ export default function ProtectedRoute({
   }, [fetchProfile]);
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.replace("/sign-in");
-    }
+if (!isLoading && !user) {
+  router.replace("/login");
+}
   }, [user, isLoading, router, pathname]);
 
   if (isLoading) {
