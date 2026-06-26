@@ -25,7 +25,7 @@ const bodyFont = Plus_Jakarta_Sans({
 export default function SignupForm() {
   const router = useRouter();
 
-  const login = useAuthStore((s) => s.login);
+const signup = useAuthStore((s) => s.signup);
 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
@@ -48,11 +48,38 @@ const [acceptTerms, setAcceptTerms] = useState(false);
     e.preventDefault();
 
     try {
+
+      if (!acceptTerms) {
+  alert("Please accept the Terms & Privacy Policy.");
+  return;
+}
+
+if (password !== confirmPassword) {
+  alert("Passwords do not match.");
+  return;
+}
+
+if (
+  !fullName ||
+  !email ||
+  !jobTitle ||
+  !password
+) {
+  alert("Please fill all fields.");
+  return;
+}
+
       setLoading(true);
+await signup(
+  fullName,
+  email,
+  jobTitle,
+  password
+);
 
-      await login(email, password);
+alert("Account created successfully!");
 
-      router.replace("/dashboard");
+router.push("/login");
     } catch (error: any) {
       alert(error.message);
     } finally {

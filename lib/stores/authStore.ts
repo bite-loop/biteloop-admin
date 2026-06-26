@@ -52,7 +52,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
 
   login: async (email, password) => {
-    const res = await fetch("/api/auth/signin", {
+    const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,6 +71,35 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
     await get().fetchProfile();
   },
+
+signup: async (
+  fullName: string,
+  email: string,
+  jobTitle: string,
+  password: string
+): Promise<void> => {
+  const res = await fetch("/api/auth/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      fullName,
+      email,
+      jobTitle,
+      password,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
+
+  return data;
+},
 
   loginWithGoogle: async () => {
   try {
@@ -116,4 +145,5 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       isLoading: false,
     });
   },
+  
 }));

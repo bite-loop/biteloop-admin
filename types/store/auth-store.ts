@@ -1,4 +1,4 @@
-import { AdminUser } from "@/types/admin-user"
+import { AdminUser } from "@/types/admin-user";
 
 export interface AuthStore {
   user: AdminUser | null;
@@ -10,7 +10,16 @@ export interface AuthStore {
     password: string
   ) => Promise<void>;
 
+  signup: (
+    fullName: string,
+    email: string,
+    jobTitle: string,
+    password: string
+  ) => Promise<void>;
+
   logout: () => Promise<void>;
+
   loginWithGoogle: () => Promise<void>;
+
   fetchProfile: () => Promise<void>;
 }

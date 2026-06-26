@@ -13,7 +13,7 @@ import PlatformHealth from "@/components/dashboard/platform-health";
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
+    <div className="pt-5 space-y-6">
       <DashboardHeader
         title="Dashboard"
         description="Monitor platform activity, revenue, and operational insights."
