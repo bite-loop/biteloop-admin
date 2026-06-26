@@ -1,9 +1,7 @@
 "use client";
 
 import SearchBar from "./search-bar";
-import NotificationButton from "./notification-button";
-import ThemeToggle from "./theme-toggle";
-import ProfileMenu from "./profile-menu";
+
 
 interface DashboardHeaderProps {
   title: string;
@@ -28,9 +26,7 @@ export default function DashboardHeader({
 
       <div className="flex items-center gap-3">
         <SearchBar />
-        <NotificationButton />
-        <ThemeToggle />
-        <ProfileMenu />
+
       </div>
     </div>
   );

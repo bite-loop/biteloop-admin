@@ -320,24 +320,6 @@ className={`${bodyFont.className} h-16 w-full rounded-2xl bg-gradient-to-r from-
               : "CREATE ACCOUNT"}
           </button>
 
-          {/* Divider */}
-
-          <div className="flex items-center gap-5 py-2">
-
-            <div className="h-px flex-1 bg-red-300" />
-
-            <span className="text-lg">
-              OR
-            </span>
-
-            <div className="h-px flex-1 bg-red-300" />
-
-          </div>
-
-          {/* Google */}
-
-          <GoogleSignInButton />
-
 <div className={`${bodyFont.className} text-center text-sm text-red-100/90`}>
   Already have an account?{" "}
   <button
