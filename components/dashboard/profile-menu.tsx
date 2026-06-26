@@ -16,30 +16,28 @@ export default function ProfileMenu() {
     .toUpperCase();
 
   return (
-    <button className="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white px-3 py-2 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg">
+    <button className="group flex h-14 items-center gap-2.5 rounded-full bg-white px-3 pr-4 shadow-sm ring-1 ring-neutral-200 transition-all duration-300 hover:shadow-lg hover:ring-red-200">
       {/* Avatar */}
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 via-red-500 to-red-400 text-sm font-bold text-white shadow-md">
-        {initials}
-      </div>
+<div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C8102E]">
+  <span className="text-sm font-extrabold leading-none !text-white">
+    {initials}
+  </span>
+</div>
+      {/* Info */}
+<div className="hidden text-left lg:block">
+  <p className="max-w-[130px] truncate text-[15px] font-semibold leading-none text-neutral-900">
+    {user.fullName}
+  </p>
 
-      {/* User Details */}
-      <div className="hidden min-w-[160px] text-left lg:block">
-        <h3 className="truncate text-sm font-semibold text-neutral-900">
-          {user.fullName}
-        </h3>
+  <p className="mt-1 text-xs font-medium text-neutral-500">
+    {user.jobTitle}
+  </p>
+</div>
 
-        <p className="truncate text-xs text-neutral-500">
-          {user.jobTitle}
-        </p>
-      </div>
-
-      {/* Divider */}
-      <div className="hidden h-8 w-px bg-neutral-200 lg:block" />
-
-      {/* Dropdown Icon */}
+      {/* Arrow */}
       <ChevronDown
         size={18}
-        className="hidden text-neutral-400 transition-all duration-300 group-hover:rotate-180 group-hover:text-red-500 lg:block"
+        className="ml-1 text-neutral-400 transition-all duration-300 group-hover:text-neutral-700"
       />
     </button>
   );
