@@ -32,7 +32,7 @@ export async function GET() {
       restaurants,
     });
   } catch (error) {
-    console.error("Error fetching pending restaurants:", error);
+    console.error("Pending Restaurants Error:", error);
 
     return NextResponse.json(
       {
