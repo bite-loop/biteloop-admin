@@ -17,6 +17,7 @@ import ReviewField from "./ReviewField";
 import OperatingHoursCard from "./OperatingHoursCard";
 import ImageGallery from "./ImageGallery";
 import RestaurantHeader from "./RestaurantHeader";
+import StickyReviewBar from "./StickyReviewBar";
 
 interface Props {
   id: string;
@@ -287,28 +288,12 @@ const [reviewLoading, setReviewLoading] =
     </div>
 
 
-    {/* Existing Buttons */}
-    <section className="flex justify-end gap-4 rounded-3xl border bg-card p-8">
-
-      <button
-        disabled={reviewLoading}
-        onClick={() => handleReview("rejected")}
-        className="rounded-2xl border border-red-200 px-8 py-3 font-semibold text-red-600 transition hover:bg-red-50"
-      >
-        Reject
-      </button>
-
-      <button
-        disabled={reviewLoading}
-        onClick={() => handleReview("approved")}
-        className="rounded-2xl bg-primary px-8 py-3 font-semibold text-white transition hover:opacity-90"
-      >
-        {reviewLoading
-          ? "Saving..."
-          : "Approve Restaurant"}
-      </button>
-
-    </section>
+<StickyReviewBar
+  restaurantName={restaurant.name}
+  loading={reviewLoading}
+  onApprove={() => handleReview("approved")}
+  onReject={() => handleReview("rejected")}
+/>
 
     </div>
   );
