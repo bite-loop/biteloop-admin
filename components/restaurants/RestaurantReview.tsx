@@ -11,6 +11,7 @@ import {
   UtensilsCrossed,
   Loader2,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   id: string;
@@ -23,6 +24,10 @@ export default function RestaurantReview({
     useState<Restaurant | null>(null);
 
   const [loading, setLoading] = useState(true);
+const router = useRouter();
+
+const [reviewLoading, setReviewLoading] =
+  useState(false);
 
   useEffect(() => {
     const fetchRestaurant = async () => {
@@ -45,6 +50,48 @@ export default function RestaurantReview({
 
     fetchRestaurant();
   }, [id]);
+
+  const handleReview = async (
+  status: "approved" | "rejected"
+) => {
+    if (!restaurant) return;
+  try {
+    setReviewLoading(true);
+
+    const res = await fetch(
+      "/api/restaurants/review",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          restaurantId: restaurant.id,
+          status,
+          comment:
+            status === "approved"
+              ? "Approved"
+              : "Rejected",
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error);
+    }
+
+    alert(data.message);
+
+    router.push("/restaurants");
+  } catch (error: any) {
+    alert(error.message);
+  } finally {
+    setReviewLoading(false);
+  }
+};
 
   if (loading) {
     return (
@@ -301,6 +348,32 @@ export default function RestaurantReview({
         </div>
 
       </section>
+
+<section className="flex justify-end gap-4 rounded-3xl border bg-card p-8">
+
+  <button
+    disabled={reviewLoading}
+    onClick={() =>
+      handleReview("rejected")
+    }
+    className="rounded-2xl border border-red-200 px-8 py-3 font-semibold text-red-600 transition hover:bg-red-50"
+  >
+    Reject
+  </button>
+
+  <button
+    disabled={reviewLoading}
+    onClick={() =>
+      handleReview("approved")
+    }
+    className="rounded-2xl bg-primary px-8 py-3 font-semibold text-white transition hover:opacity-90"
+  >
+    {reviewLoading
+      ? "Saving..."
+      : "Approve Restaurant"}
+  </button>
+
+</section>
 
     </div>
   );

@@ -8,6 +8,7 @@ import {
   MapPin,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function PendingRestaurants() {
   const [restaurants, setRestaurants] = useState<
@@ -133,11 +134,14 @@ export default function PendingRestaurants() {
 
           {/* Footer */}
 
-          <button className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 font-medium text-white transition hover:opacity-90">
-            Review Restaurant
+<Link
+  href={`/restaurants/${restaurant.id}`}
+  className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3 font-medium text-white transition hover:opacity-90"
+>
+  Review Restaurant
 
-            <ChevronRight size={18} />
-          </button>
+  <ChevronRight size={18} />
+</Link>
         </div>
       ))}
     </div>
