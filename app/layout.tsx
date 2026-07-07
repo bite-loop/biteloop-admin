@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono, Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "sonner";
+import { cn } from "@/lib/utils";
+
+const robotoHeading = Roboto({subsets:['latin'],variable:'--font-heading'});
+const montserrat = Montserrat({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +40,11 @@ export default function RootLayout({
 <html
   lang="en"
   suppressHydrationWarning
-  className={`dark ${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} h-full antialiased font-sans`}
+ className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", montserrat.variable, robotoHeading.variable)}
 >
 <body className="min-h-full flex flex-col">
-<ThemeProvider>
+<ThemeProvider
+>
   {children}
 
   <Toaster
