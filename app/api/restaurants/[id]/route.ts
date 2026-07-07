@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { verifyAuth } from "@/helper/auth-helper/verify";
 import { adminDb } from "@/lib/firebase/admin";
 
-export async function GET() {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    // Verify admin session
     const user = await verifyAuth();
 
     if (!user) {
@@ -14,29 +16,33 @@ export async function GET() {
       );
     }
 
-    // Fetch all pending restaurants
-    const snapshot = await adminDb
+    const { id } = await params;
+
+    const doc = await adminDb
       .collection("restaurants")
-      .where("onboardingStatus", "==", "pending_approval")
-      .orderBy("submittedAt", "desc")
+      .doc(id)
       .get();
 
-    const restaurants = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    if (!doc.exists) {
+      return NextResponse.json(
+        { error: "Restaurant not found" },
+        { status: 404 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      count: restaurants.length,
-      restaurants,
+      restaurant: {
+        id: doc.id,
+        ...doc.data(),
+      },
     });
   } catch (error) {
-    console.error("Pending Restaurants Error:", error);
+    console.error(error);
 
     return NextResponse.json(
       {
-        error: "Failed to fetch pending restaurants",
+        error: "Failed to fetch restaurant",
       },
       {
         status: 500,
