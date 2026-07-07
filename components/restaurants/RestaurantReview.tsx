@@ -16,6 +16,7 @@ import ReviewSection from "./ReviewSection";
 import ReviewField from "./ReviewField";
 import OperatingHoursCard from "./OperatingHoursCard";
 import ImageGallery from "./ImageGallery";
+import RestaurantHeader from "./RestaurantHeader";
 
 interface Props {
   id: string;
@@ -114,40 +115,13 @@ const [reviewLoading, setReviewLoading] =
   }
 
   return (
-    <div className="space-y-8">
+  <div className="mx-auto max-w-7xl space-y-8 pb-32">
 
-      {/* Header */}
+    {/* Header */}
+<RestaurantHeader restaurant={restaurant} />
 
-      <div className="rounded-3xl border bg-card p-8">
-
-        <div className="flex items-center gap-5">
-
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-primary/10">
-            <Store
-              size={34}
-              className="text-primary"
-            />
-          </div>
-
-          <div>
-
-            <h1 className="text-3xl font-bold">
-              {restaurant.name}
-            </h1>
-
-            <p className="mt-2 text-muted-foreground">
-              {restaurant.description ||
-                "No description provided."}
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* Restaurant */}
-
+    {/* Restaurant + Business */}
+    <div className="grid gap-6 xl:grid-cols-2">
 <ReviewSection
     title="Restaurant Information"
     icon={<UtensilsCrossed size={22} />}
@@ -185,7 +159,37 @@ const [reviewLoading, setReviewLoading] =
 
 </ReviewSection>
 
-      {/* Address */}
+<ReviewSection
+    title="Business Details"
+    icon={<Building2 size={22} />}
+>
+
+    <ReviewField
+        label="Legal Name"
+        value={restaurant.businessDetails?.legalName}
+    />
+
+    <ReviewField
+        label="Business Number"
+        value={restaurant.businessDetails?.businessNumber}
+    />
+
+    <ReviewField
+        label="Business Phone"
+        value={restaurant.businessDetails?.businessPhone}
+    />
+
+    <ReviewField
+        label="GST / HST"
+        value={restaurant.businessDetails?.hstNumber}
+    />
+
+</ReviewSection>
+
+</div>
+
+    {/* Address + Operating Hours */}
+    <div className="grid gap-6 xl:grid-cols-2">
 
 <ReviewSection
     title="Address"
@@ -217,40 +221,31 @@ const [reviewLoading, setReviewLoading] =
 <OperatingHoursCard
   hours={restaurant.operatingHours}
 />
+</div>
 
+    {/* Images + Empty Menu Placeholder */}
+    <div className="grid gap-6 xl:grid-cols-2">
 <ImageGallery
   images={restaurant.images}
 />
-      {/* Business */}
 
-<ReviewSection
-    title="Business Details"
-    icon={<Building2 size={22} />}
->
+    </div>
+      <div className="rounded-3xl border bg-card p-8">
+        <div className="flex items-center gap-3">
+          <UtensilsCrossed className="h-5 w-5 text-primary" />
+          <h2 className="text-lg font-semibold">
+            Menu Preview
+          </h2>
+        </div>
 
-    <ReviewField
-        label="Legal Name"
-        value={restaurant.businessDetails?.legalName}
-    />
+        <p className="mt-4 text-sm text-muted-foreground">
+          Menu preview will be added in the next step.
+        </p>
+      </div>
 
-    <ReviewField
-        label="Business Number"
-        value={restaurant.businessDetails?.businessNumber}
-    />
 
-    <ReviewField
-        label="Business Phone"
-        value={restaurant.businessDetails?.businessPhone}
-    />
-
-    <ReviewField
-        label="GST / HST"
-        value={restaurant.businessDetails?.hstNumber}
-    />
-
-</ReviewSection>
-
-      {/* Bank */}
+    {/* Bank + Empty Settings Placeholder */}
+    <div className="grid gap-6 xl:grid-cols-2">
 
 <ReviewSection
     title="Bank Details"
@@ -279,52 +274,43 @@ const [reviewLoading, setReviewLoading] =
 
 </ReviewSection>
 
-<section className="flex justify-end gap-4 rounded-3xl border bg-card p-8">
+      <div className="rounded-3xl border bg-card p-8">
+        <h2 className="text-lg font-semibold">
+          Settings
+        </h2>
 
-  <button
-    disabled={reviewLoading}
-    onClick={() =>
-      handleReview("rejected")
-    }
-    className="rounded-2xl border border-red-200 px-8 py-3 font-semibold text-red-600 transition hover:bg-red-50"
-  >
-    Reject
-  </button>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Settings section will be added later.
+        </p>
+      </div>
 
-  <button
-    disabled={reviewLoading}
-    onClick={() =>
-      handleReview("approved")
-    }
-    className="rounded-2xl bg-primary px-8 py-3 font-semibold text-white transition hover:opacity-90"
-  >
-    {reviewLoading
-      ? "Saving..."
-      : "Approve Restaurant"}
-  </button>
+    </div>
 
-</section>
+
+    {/* Existing Buttons */}
+    <section className="flex justify-end gap-4 rounded-3xl border bg-card p-8">
+
+      <button
+        disabled={reviewLoading}
+        onClick={() => handleReview("rejected")}
+        className="rounded-2xl border border-red-200 px-8 py-3 font-semibold text-red-600 transition hover:bg-red-50"
+      >
+        Reject
+      </button>
+
+      <button
+        disabled={reviewLoading}
+        onClick={() => handleReview("approved")}
+        className="rounded-2xl bg-primary px-8 py-3 font-semibold text-white transition hover:opacity-90"
+      >
+        {reviewLoading
+          ? "Saving..."
+          : "Approve Restaurant"}
+      </button>
+
+    </section>
 
     </div>
   );
 }
 
-function Info({
-  label,
-  value,
-}: {
-  label: string;
-  value?: string | number;
-}) {
-  return (
-    <div className="rounded-2xl border bg-background p-5">
-      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        {label}
-      </p>
-
-      <p className="mt-2 text-base font-semibold">
-        {value || "-"}
-      </p>
-    </div>
-  );
-}
