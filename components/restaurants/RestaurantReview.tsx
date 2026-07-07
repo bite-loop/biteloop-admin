@@ -18,6 +18,7 @@ import OperatingHoursCard from "./OperatingHoursCard";
 import ImageGallery from "./ImageGallery";
 import RestaurantHeader from "./RestaurantHeader";
 import StickyReviewBar from "./StickyReviewBar";
+import { toast } from "sonner";
 
 interface Props {
   id: string;
@@ -89,11 +90,19 @@ const [reviewLoading, setReviewLoading] =
       throw new Error(data.error);
     }
 
-    alert(data.message);
+toast.success(
+  status === "approved"
+    ? "Restaurant approved successfully."
+    : "Restaurant rejected successfully."
+);
 
-    router.push("/restaurants");
+router.push("/restaurants");
   } catch (error: any) {
-    alert(error.message);
+    toast.error(
+  error instanceof Error
+    ? error.message
+    : "Something went wrong."
+);
   } finally {
     setReviewLoading(false);
   }

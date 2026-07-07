@@ -2,6 +2,7 @@
 
 import { Store, CalendarDays } from "lucide-react";
 import { Restaurant } from "@/types/restaurant";
+import Image from "next/image";
 
 interface Props {
   restaurant: Restaurant;
@@ -19,11 +20,22 @@ export default function RestaurantHeader({
 
         <div className="flex items-center gap-5">
 
-          <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-primary/10">
-            <Store
-              className="h-10 w-10 text-primary"
-            />
-          </div>
+<div className="relative h-24 w-24 overflow-hidden rounded-3xl border border-border bg-muted">
+
+  {restaurant.images?.logo ? (
+    <Image
+      src={restaurant.images.logo}
+      alt={restaurant.name}
+      fill
+      className="object-cover"
+    />
+  ) : (
+    <div className="flex h-full w-full items-center justify-center bg-primary/10">
+      <Store className="h-10 w-10 text-primary" />
+    </div>
+  )}
+
+</div>
 
           <div>
 
