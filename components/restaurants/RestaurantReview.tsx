@@ -12,6 +12,10 @@ import {
   Loader2,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ReviewSection from "./ReviewSection";
+import ReviewField from "./ReviewField";
+import OperatingHoursCard from "./OperatingHoursCard";
+import ImageGallery from "./ImageGallery";
 
 interface Props {
   id: string;
@@ -144,210 +148,136 @@ const [reviewLoading, setReviewLoading] =
 
       {/* Restaurant */}
 
-      <section className="rounded-3xl border bg-card p-8">
+<ReviewSection
+    title="Restaurant Information"
+    icon={<UtensilsCrossed size={22} />}
+>
 
-        <div className="mb-6 flex items-center gap-3">
+    <ReviewField
+        label="Restaurant Name"
+        value={restaurant.name}
+    />
 
-          <UtensilsCrossed
-            className="text-primary"
-            size={22}
-          />
+    <ReviewField
+        label="Description"
+        value={restaurant.description}
+    />
 
-          <h2 className="text-xl font-semibold">
-            Restaurant Information
-          </h2>
+    <ReviewField
+        label="Cuisine"
+        value={restaurant.cuisine?.join(", ")}
+    />
 
-        </div>
+    <ReviewField
+        label="Business Type"
+        value={restaurant.businessType}
+    />
 
-        <div className="grid gap-5 md:grid-cols-2">
+    <ReviewField
+        label="Price Range"
+        value={restaurant.priceRange}
+    />
 
-          <Info
-            label="Cuisine"
-            value={
-              restaurant.cuisine?.join(", ") ||
-              "-"
-            }
-          />
+    <ReviewField
+        label="Delivery Time"
+        value={restaurant.deliveryTime}
+    />
 
-          <Info
-            label="Price Range"
-            value={restaurant.priceRange}
-          />
-
-          <Info
-            label="Delivery Time"
-            value={restaurant.deliveryTime}
-          />
-
-          <Info
-            label="Business Type"
-            value={restaurant.businessType}
-          />
-
-        </div>
-
-      </section>
+</ReviewSection>
 
       {/* Address */}
 
-      <section className="rounded-3xl border bg-card p-8">
+<ReviewSection
+    title="Address"
+    icon={<MapPin size={22} />}
+>
 
-        <div className="mb-6 flex items-center gap-3">
+    <ReviewField
+        label="Street"
+        value={restaurant.address?.street}
+    />
 
-          <MapPin
-            className="text-primary"
-            size={22}
-          />
+    <ReviewField
+        label="City"
+        value={restaurant.address?.city}
+    />
 
-          <h2 className="text-xl font-semibold">
-            Address
-          </h2>
+    <ReviewField
+        label="State"
+        value={restaurant.address?.state}
+    />
 
-        </div>
+    <ReviewField
+        label="Zip Code"
+        value={restaurant.address?.zipCode}
+    />
 
-        <div className="grid gap-5 md:grid-cols-2">
+</ReviewSection>
 
-          <Info
-            label="Street"
-            value={
-              restaurant.address?.street
-            }
-          />
+<OperatingHoursCard
+  hours={restaurant.operatingHours}
+/>
 
-          <Info
-            label="City"
-            value={
-              restaurant.address?.city
-            }
-          />
-
-          <Info
-            label="State"
-            value={
-              restaurant.address?.state
-            }
-          />
-
-          <Info
-            label="Zip Code"
-            value={
-              restaurant.address?.zipCode
-            }
-          />
-
-        </div>
-
-      </section>
-
+<ImageGallery
+  images={restaurant.images}
+/>
       {/* Business */}
 
-      <section className="rounded-3xl border bg-card p-8">
+<ReviewSection
+    title="Business Details"
+    icon={<Building2 size={22} />}
+>
 
-        <div className="mb-6 flex items-center gap-3">
+    <ReviewField
+        label="Legal Name"
+        value={restaurant.businessDetails?.legalName}
+    />
 
-          <Building2
-            className="text-primary"
-            size={22}
-          />
+    <ReviewField
+        label="Business Number"
+        value={restaurant.businessDetails?.businessNumber}
+    />
 
-          <h2 className="text-xl font-semibold">
-            Business Details
-          </h2>
+    <ReviewField
+        label="Business Phone"
+        value={restaurant.businessDetails?.businessPhone}
+    />
 
-        </div>
+    <ReviewField
+        label="GST / HST"
+        value={restaurant.businessDetails?.hstNumber}
+    />
 
-        <div className="grid gap-5 md:grid-cols-2">
-
-          <Info
-            label="Legal Name"
-            value={
-              restaurant.businessDetails
-                ?.legalName
-            }
-          />
-
-          <Info
-            label="Business Number"
-            value={
-              restaurant.businessDetails
-                ?.businessNumber
-            }
-          />
-
-          <Info
-            label="Business Phone"
-            value={
-              restaurant.businessDetails
-                ?.businessPhone
-            }
-          />
-
-          <Info
-            label="GST / HST"
-            value={
-              restaurant.businessDetails
-                ?.hstNumber
-            }
-          />
-
-        </div>
-
-      </section>
+</ReviewSection>
 
       {/* Bank */}
 
-      <section className="rounded-3xl border bg-card p-8">
+<ReviewSection
+    title="Bank Details"
+    icon={<Wallet size={22} />}
+>
 
-        <div className="mb-6 flex items-center gap-3">
+    <ReviewField
+        label="Account Holder"
+        value={restaurant.bankDetails?.accountHolderName}
+    />
 
-          <Wallet
-            className="text-primary"
-            size={22}
-          />
+    <ReviewField
+        label="Bank Name"
+        value={restaurant.bankDetails?.bankName}
+    />
 
-          <h2 className="text-xl font-semibold">
-            Bank Details
-          </h2>
+    <ReviewField
+        label="Account Number"
+        value={restaurant.bankDetails?.accountNumber}
+    />
 
-        </div>
+    <ReviewField
+        label="Account Type"
+        value={restaurant.bankDetails?.accountType}
+    />
 
-        <div className="grid gap-5 md:grid-cols-2">
-
-          <Info
-            label="Account Holder"
-            value={
-              restaurant.bankDetails
-                ?.accountHolderName
-            }
-          />
-
-          <Info
-            label="Bank Name"
-            value={
-              restaurant.bankDetails
-                ?.bankName
-            }
-          />
-
-          <Info
-            label="Account Number"
-            value={
-              restaurant.bankDetails
-                ?.accountNumber
-            }
-          />
-
-          <Info
-            label="Account Type"
-            value={
-              restaurant.bankDetails
-                ?.accountType
-            }
-          />
-
-        </div>
-
-      </section>
+</ReviewSection>
 
 <section className="flex justify-end gap-4 rounded-3xl border bg-card p-8">
 
