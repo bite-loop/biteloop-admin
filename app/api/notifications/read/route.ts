@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { verifyAuth } from "@/helper/auth-helper/verify";
 import { adminDb } from "@/lib/firebase/admin";
 
-export async function GET() {
+export async function POST(request: Request) {
   try {
     const user = await verifyAuth();
 
@@ -13,28 +13,31 @@ export async function GET() {
       );
     }
 
-const snapshot = await adminDb
-  .collection("notifications")
-  .where("read", "==", false)
-  .orderBy("createdAt", "desc")
-  .limit(10)
-  .get();
+    const { notificationId } = await request.json();
 
-    const notifications = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    if (!notificationId) {
+      return NextResponse.json(
+        { error: "Notification ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await adminDb
+      .collection("notifications")
+      .doc(notificationId)
+      .update({
+        read: true,
+      });
 
     return NextResponse.json({
       success: true,
-      notifications,
     });
   } catch (error) {
     console.error(error);
 
     return NextResponse.json(
       {
-        error: "Failed to fetch notifications",
+        error: "Failed to update notification",
       },
       {
         status: 500,

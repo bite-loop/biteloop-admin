@@ -10,22 +10,45 @@ interface Props {
   status: string;
   type: string;
   read: boolean;
+    onNotificationRead: (
+    id: string
+  ) => void;
 }
 
 export default function NotificationItem({
+  id,
   restaurantId,
   restaurantName,
   status,
   type,
   read,
+  onNotificationRead,
 }: Props) {
   const router = useRouter();
 
+const handleClick = async () => {
+  try {
+    await fetch("/api/notifications/read", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        notificationId: id,
+      }),
+    });
+
+    onNotificationRead(id);
+
+    router.push(`/restaurants/${restaurantId}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <button
-      onClick={() =>
-        router.push(`/restaurants/${restaurantId}`)
-      }
+    onClick={handleClick}
       className="flex w-full items-start gap-4 rounded-xl p-4 text-left transition hover:bg-accent"
     >
       <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
