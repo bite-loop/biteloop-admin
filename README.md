@@ -1,162 +1,141 @@
-# 🛠️ BITELOOP ADMIN — Command Center
+# 🛠️ BiteLoop Admin — Platform Command Center
 
 <p align="center">
   <b>Monitor • Moderate • Manage • Scale</b>
 </p>
 
 <div align="center">
-  <img width="1200" src="./public/banner2.png" alt="biteloop-admin-banner" />
+  <img width="1200" src="./public/banner2.png" alt="BiteLoop Admin Banner" />
 </div>
 
----
-
-# 🎯 About BiteLoop Admin
-
-BiteLoop Admin serves as the operational headquarters of the entire BiteLoop ecosystem.
-
-Built for platform administrators, support teams, and operations managers, it provides complete visibility and control over restaurants, users, orders, growth initiatives, and platform-wide activities.
-
-- 📊 Monitor platform performance
-- 🏪 Manage restaurant partners
-- 👥 Oversee customer accounts
-- 📦 Track order operations
-- 🎫 Resolve support issues
-- 🎁 Drive growth initiatives
-- ⚙️ Control platform settings
+<p align="center">
+The centralized dashboard powering the entire BiteLoop ecosystem.
+</p>
 
 ---
 
-# 🧠 Core Operations
+## 🚀 About
 
-### 📊 Platform Intelligence
-
-Track the health and performance of the platform in real time.
-
-- Revenue Analytics
-- Growth Monitoring
-- User Activity Insights
-- Operational Metrics
-- Platform Health Tracking
+BiteLoop Admin is the operational hub built for platform administrators to oversee every aspect of the BiteLoop ecosystem. From onboarding restaurants to monitoring orders, users, and platform health, everything is managed through a single unified dashboard.
 
 ---
 
-### 🏪 Restaurant Administration
+## ⚡ Core Modules
 
-Manage restaurant partners throughout their lifecycle.
+<table>
+<tr>
+<td width="50%">
 
-- Restaurant Approvals
-- Verification Management
+### 🏪 Restaurant Management
+- Restaurant Onboarding
+- Approval Workflow
+- Verification
 - Menu Moderation
-- Performance Analytics
-- Compliance Controls
+- Performance Monitoring
 
----
+</td>
 
-### 👥 User Administration
+<td width="50%">
 
-Tools for managing and supporting platform users.
-
+### 👥 User Management
 - User Directory
 - Account Monitoring
-- Suspension Controls
-- Order History Access
-- Loyalty Program Oversight
+- Suspensions
+- Activity Tracking
+- Loyalty Oversight
 
----
+</td>
+</tr>
+
+<tr>
+<td>
 
 ### 📦 Order Operations
+- Live Order Tracking
+- Refund Management
+- Issue Resolution
+- Operational Reports
 
-Complete visibility into order activity across the platform.
+</td>
 
-- Live Order Monitoring
-- Order Lifecycle Tracking
-- Refund Investigations
-- Escalation Management
-- Operational Reporting
-
----
+<td>
 
 ### 🎫 Support & Moderation
-
-Deliver efficient support and maintain platform quality.
-
-- Ticket Management
 - Customer Support
 - Restaurant Support
-- Moderation Tools
-- Escalation Workflows
+- Ticket Management
+- Content Moderation
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+### 📊 Analytics
+- Revenue Insights
+- Platform Metrics
+- Growth Analytics
+- Operational Intelligence
+
+</td>
+
+<td>
+
+### ⚙️ Administration
+- Roles & Permissions
+- Notifications
+- Platform Settings
+- System Controls
+
+</td>
+</tr>
+</table>
 
 ---
 
-### 🎁 Promotions & Growth
-
-Launch campaigns and accelerate platform growth.
-
-- Coupon Management
-- Campaign Creation
-- Discount Monitoring
-- Promotion Analytics
-- Growth Operations
-
----
-
-### ⚙️ Platform Controls
-
-Centralized administration and configuration.
-
-- System Settings
-- Notification Controls
-- Role Management
-- Access Permissions
-- Platform Configuration
-
----
-
-# 🏗️ Administrative Ecosystem
+## 🏗️ Platform Architecture
 
 ```text
-                    BITELOOP ADMIN
-                           │
-        ┌──────────────────┼──────────────────┐
-        │                  │                  │
-        ▼                  ▼                  ▼
+                        BiteLoop Admin
+                              │
+      ┌───────────────────────┼────────────────────────┐
+      │                       │                        │
+      ▼                       ▼                        ▼
 
-   Restaurants         Users             Orders
-        │                  │                  │
-        ▼                  ▼                  ▼
+ Restaurants               Users                  Orders
+      │                       │                        │
+      └──────────────┬────────┴──────────────┬─────────┘
+                     ▼                       ▼
 
- Verification      Monitoring      Live Tracking
- Moderation        Support         Refund Tools
- Analytics         Management      Reporting
+             Support & Moderation      Analytics
 
-        └──────────────────┼──────────────────┘
-                           │
-                           ▼
+                     └──────────┬──────────┘
+                                ▼
 
-                    Platform Control
-
-                 Analytics • Growth
-                 Support • Moderation
-                 Configuration
+                     Platform Administration
 ```
 
 ---
 
-# 🚀 Future Expansion
+## 🚀 Roadmap
 
-- 🤖 AI Analytics Assistant
-- 🛡️ Fraud Detection System
+- 🤖 AI-Powered Analytics
+- 🛡️ Fraud Detection
 - 🚚 Delivery Partner Management
-- ⚡ Real-Time Operations Center
-- 💳 Automated Refund Processing
-- 🌍 Multi-City Infrastructure
-- 🌎 Multi-Country Expansion
-- 📈 Predictive Business Intelligence
+- 📈 Advanced Business Intelligence
+- ⚡ Real-Time Operations
+- 🌍 Multi-City Expansion
+- 🌎 Multi-Country Support
 
 ---
 
-# 🌟 Vision
+## 🌟 Vision
 
-BiteLoop Admin is designed to become the central nervous system of the BiteLoop ecosystem — providing the tools, intelligence, and operational control required to scale food delivery operations across cities, regions, and eventually global markets.
+Build a modern operations platform that gives administrators complete visibility, intelligent insights, and full control over every aspect of the BiteLoop ecosystem—enabling seamless growth from a single city to a global food delivery network.
 
 ---
+
+<p align="center">
+<b>One dashboard. Complete platform control.</b>
+</p>
