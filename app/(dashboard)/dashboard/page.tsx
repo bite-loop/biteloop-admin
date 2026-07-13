@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import DashboardHeader from "@/components/dashboard/dashboard-header";
 import StatsCard from "@/components/dashboard/stats-card";
 import {
@@ -12,7 +15,38 @@ import LatestOrders from "@/components/dashboard/latest-orders";
 import PlatformHealth from "@/components/dashboard/platform-health";
 
 export default function DashboardPage() {
+
+  const [stats, setStats] = useState({
+    totalRestaurants: 0,
+  });
+
+  const [loading, setLoading] =
+    useState(true);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const res = await fetch(
+          "/api/dashboard"
+        );
+
+        const data = await res.json();
+
+        if (data.success) {
+          setStats(data.stats);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboard();
+  }, []);
+
   return (
+
     <div className="pt-5 space-y-6">
       <DashboardHeader
         title="Dashboard"
@@ -27,12 +61,16 @@ export default function DashboardPage() {
     change="+18.4%"
   />
 
-  <StatsCard
-    title="Restaurants"
-    value="342"
-    icon={Store}
-    change="+5.2%"
-  />
+<StatsCard
+  title="Restaurants"
+  value={
+    loading
+      ? "..."
+      : stats.totalRestaurants.toString()
+  }
+  icon={Store}
+  change="Live"
+/>
 
   <StatsCard
     title="Orders"
