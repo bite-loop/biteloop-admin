@@ -16,9 +16,11 @@ export default function ProtectedRoute({
   const isLoading = useAuthStore((s) => s.isLoading);
   const fetchProfile = useAuthStore((s) => s.fetchProfile);
 
-  useEffect(() => {
+useEffect(() => {
+  if (!user) {
     fetchProfile();
-  }, [fetchProfile]);
+  }
+}, [user, fetchProfile]);
 
   useEffect(() => {
 if (!isLoading && !user) {
@@ -27,11 +29,16 @@ if (!isLoading && !user) {
   }, [user, isLoading, router, pathname]);
 
   if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Loading...
-      </div>
-    );
+return (
+  <div className="flex min-h-screen items-center justify-center bg-background">
+    <div className="flex flex-col items-center gap-4">
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      <p className="text-sm text-muted-foreground">
+        Authenticating...
+      </p>
+    </div>
+  </div>
+);
   }
 
   if (!user) {

@@ -1,17 +1,12 @@
-'use client'
-import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import { redirect } from "next/navigation";
+import { verifyAuth } from "@/helper/auth-helper/verify";
 
-const page = () => {
-  const router = useRouter()
-  useEffect(() => {
-    setTimeout(() => {
-      router.push("/login")
-    }, 0);
-  },[])
-  return (
-    <></>
-  )
+export default async function Home() {
+  const user = await verifyAuth();
+
+  if (user) {
+    redirect("/dashboard");
+  }
+
+  redirect("/login");
 }
-
-export default page
