@@ -19,6 +19,7 @@ import ImageGallery from "./ImageGallery";
 import RestaurantHeader from "./RestaurantHeader";
 import StickyReviewBar from "./StickyReviewBar";
 import { toast } from "sonner";
+import RejectRestaurantDialog from "./RejectRestaurantDialog";
 
 interface Props {
   id: string;
@@ -34,6 +35,8 @@ export default function RestaurantReview({
 const router = useRouter();
 
 const [reviewLoading, setReviewLoading] =
+  useState(false);
+const [rejectDialogOpen, setRejectDialogOpen] =
   useState(false);
 
   useEffect(() => {
@@ -59,7 +62,9 @@ const [reviewLoading, setReviewLoading] =
   }, [id]);
 
   const handleReview = async (
-  status: "approved" | "rejected"
+  status: "approved" | "rejected",
+  reason?: string,
+  description?: string
 ) => {
     if (!restaurant) return;
   try {
@@ -73,14 +78,18 @@ const [reviewLoading, setReviewLoading] =
           "Content-Type":
             "application/json",
         },
-        body: JSON.stringify({
-          restaurantId: restaurant.id,
-          status,
-          comment:
-            status === "approved"
-              ? "Approved"
-              : "Rejected",
-        }),
+body: JSON.stringify({
+  restaurantId: restaurant.id,
+  status,
+
+  comment:
+    status === "approved"
+      ? "Approved"
+      : "Rejected",
+
+  reason,
+  description,
+}),
       }
     );
 
@@ -301,9 +310,20 @@ router.push("/restaurants");
   restaurantName={restaurant.name}
   loading={reviewLoading}
   onApprove={() => handleReview("approved")}
-  onReject={() => handleReview("rejected")}
+  onReject={() => setRejectDialogOpen(true)}
 />
 
+<RejectRestaurantDialog
+  open={rejectDialogOpen}
+  onOpenChange={setRejectDialogOpen}
+  onReject={(reason, description) =>
+    handleReview(
+      "rejected",
+      reason,
+      description
+    )
+  }
+/>
     </div>
   );
 }

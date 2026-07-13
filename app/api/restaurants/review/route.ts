@@ -13,11 +13,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const {
-      restaurantId,
-      status,
-      comment,
-    } = await request.json();
+const {
+  restaurantId,
+  status,
+  comment,
+  reason,
+  description,
+} = await request.json();
 
     if (!restaurantId || !status) {
       return NextResponse.json(
@@ -32,18 +34,22 @@ export async function POST(request: Request) {
 
     // Update Restaurant
 
-    await adminDb
-      .collection("restaurants")
-      .doc(restaurantId)
-      .update({
-        onboardingStatus: status,
-        isActive: status === "approved",
+await adminDb
+  .collection("restaurants")
+  .doc(restaurantId)
+  .update({
+    onboardingStatus: status,
+    isActive: status === "approved",
 
-        reviewedBy: admin.uid,
-        reviewedAt: new Date(),
-        reviewComment: comment || "",
-      });
-
+    review: {
+      status,
+      comment: comment || "",
+      reason: reason || "",
+      description: description || "",
+      reviewedBy: admin.uid,
+      reviewedAt: new Date(),
+    },
+  });
     // Update Notification
 
     const notificationSnapshot =
@@ -59,10 +65,13 @@ export async function POST(request: Request) {
     if (!notificationSnapshot.empty) {
       notificationSnapshot.docs.forEach(
         async (doc) => {
-          await doc.ref.update({
-            status,
-            read: true,
-          });
+await doc.ref.update({
+  status,
+  read: true,
+
+  reason: reason || "",
+  description: description || "",
+});
         }
       );
     }

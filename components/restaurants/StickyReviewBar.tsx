@@ -45,42 +45,13 @@ export default function StickyReviewBar({
 
         <div className="flex items-center gap-3">
 
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <button
-      disabled={loading}
-      className="rounded-xl border border-red-500/30 px-6 py-2.5 font-semibold text-red-600 transition hover:bg-red-500/10 disabled:opacity-50"
-    >
-      Reject
-    </button>
-  </AlertDialogTrigger>
-
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>
-        Reject this restaurant?
-      </AlertDialogTitle>
-
-      <AlertDialogDescription>
-        The restaurant will remain inactive and its onboarding
-        request will be marked as rejected.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-
-    <AlertDialogFooter>
-      <AlertDialogCancel>
-        Cancel
-      </AlertDialogCancel>
-
-      <AlertDialogAction
-        onClick={onReject}
-        className="bg-red-600 hover:bg-red-700"
-      >
-        Reject Restaurant
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
+<button
+  onClick={onReject}
+  disabled={loading}
+  className="rounded-xl border border-red-500/30 px-6 py-2.5 font-semibold text-red-600 transition hover:bg-red-500/10 disabled:opacity-50"
+>
+  Reject
+</button>
 
 <AlertDialog>
   <AlertDialogTrigger asChild>
