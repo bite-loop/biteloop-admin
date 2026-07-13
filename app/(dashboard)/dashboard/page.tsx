@@ -21,6 +21,8 @@ const [stats, setStats] = useState({
   totalRestaurants: 0,
 });
 
+const [recentActivity, setRecentActivity] = useState([]);
+
   const [loading, setLoading] =
     useState(true);
 
@@ -32,10 +34,13 @@ const [stats, setStats] = useState({
         );
 
         const data = await res.json();
+if (data.success) {
+  setStats(data.stats);
 
-        if (data.success) {
-          setStats(data.stats);
-        }
+  setRecentActivity(
+    data.recentActivity || []
+  );
+}
       } catch (error) {
         console.error(error);
       } finally {
@@ -96,7 +101,9 @@ const [stats, setStats] = useState({
     <RevenueChart />
   </div>
 
-  <RecentActivity />
+ <RecentActivity
+  activities={recentActivity}
+/>
 </div>
 
 <div className="mt-6 grid gap-6 lg:grid-cols-3">

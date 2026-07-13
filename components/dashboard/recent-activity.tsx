@@ -1,8 +1,4 @@
-import {
-  Store,
-  ShoppingBag,
-  Users,
-} from "lucide-react";
+import { Store } from "lucide-react";
 
 import {
   Card,
@@ -11,28 +7,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const activities = [
-  {
-    icon: Store,
-    title: "Restaurant Approved",
-    subtitle: "Burger House joined BiteLoop",
-    time: "2m ago",
-  },
-  {
-    icon: ShoppingBag,
-    title: "Order Refunded",
-    subtitle: "Order #BL20391",
-    time: "18m ago",
-  },
-  {
-    icon: Users,
-    title: "New User",
-    subtitle: "John Doe created an account",
-    time: "1h ago",
-  },
-];
+interface Activity {
+  id: string;
+  restaurantName: string;
+  status: string;
+  type: string;
+  createdAt: {
+    _seconds: number;
+    _nanoseconds: number;
+  };
+}
 
-export default function RecentActivity() {
+interface Props {
+  activities: Activity[];
+}
+
+export default function RecentActivity({
+  activities,
+}: Props) {
   return (
     <Card className="rounded-2xl border-border/60 shadow-none">
       <CardHeader className="pb-3">
@@ -42,36 +34,50 @@ export default function RecentActivity() {
       </CardHeader>
 
       <CardContent className="space-y-1">
-        {activities.map((activity) => {
-          const Icon = activity.icon;
+        {activities.length === 0 ? (
+          <div className="flex h-40 items-center justify-center text-center">
+            <div>
+              <Store className="mx-auto mb-3 h-8 w-8 text-muted-foreground" />
 
-          return (
+              <p className="font-medium">
+                No recent activity
+              </p>
+
+              <p className="mt-1 text-sm text-muted-foreground">
+                Restaurant onboarding activity will appear here.
+              </p>
+            </div>
+          </div>
+        ) : (
+          activities.map((activity) => (
             <div
-              key={activity.title}
+              key={activity.id}
               className="group flex items-start gap-4 rounded-xl px-2 py-3 transition-colors hover:bg-muted/40"
             >
               <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border/60">
-                <Icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+                <Store className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
               </div>
 
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-3">
                   <p className="truncate text-sm font-medium">
-                    {activity.title}
+                    {activity.restaurantName}
                   </p>
 
-                  <span className="text-xs text-muted-foreground">
-                    {activity.time}
+                  <span className="text-xs capitalize text-muted-foreground">
+                    {activity.status}
                   </span>
                 </div>
 
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {activity.subtitle}
+                  {activity.type === "onboarding_submitted"
+                    ? "Submitted onboarding for review."
+                    : activity.type}
                 </p>
               </div>
             </div>
-          );
-        })}
+          ))
+        )}
       </CardContent>
     </Card>
   );

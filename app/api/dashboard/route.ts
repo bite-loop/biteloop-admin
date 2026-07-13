@@ -31,15 +31,28 @@ const usersSnapshot =
 const totalUsers =
   usersSnapshot.size;
 
-    return NextResponse.json({
-      success: true,
+  // Recent Activity
+const activitySnapshot = await adminDb
+  .collection("notifications")
+  .orderBy("createdAt", "desc")
+  .limit(5)
+  .get();
 
-stats: {
-  totalUsers,
-  totalRestaurants,
+const recentActivity = activitySnapshot.docs.map((doc) => ({
+  id: doc.id,
+  ...doc.data(),
+}));
 
-      },
-    });
+return NextResponse.json({
+  success: true,
+
+  stats: {
+    totalUsers,
+    totalRestaurants,
+  },
+
+  recentActivity,
+});
   } catch (error) {
     console.error(error);
 
