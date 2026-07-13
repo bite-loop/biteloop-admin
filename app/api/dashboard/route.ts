@@ -22,11 +22,22 @@ export async function GET() {
     const totalRestaurants =
       restaurantsSnapshot.size;
 
+      // Total Users
+const usersSnapshot =
+  await adminDb
+    .collection("users")
+    .get();
+
+const totalUsers =
+  usersSnapshot.size;
+
     return NextResponse.json({
       success: true,
 
-      stats: {
-        totalRestaurants,
+stats: {
+  totalUsers,
+  totalRestaurants,
+
       },
     });
   } catch (error) {
