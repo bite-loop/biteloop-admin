@@ -6,8 +6,6 @@ export async function GET() {
   try {
     const user = await verifyAuth();
 
-    console.log("Decoded User:", user);
-
     if (!user) {
       return NextResponse.json(
         { error: "Unauthorized" },
@@ -15,14 +13,10 @@ export async function GET() {
       );
     }
 
-    console.log("UID:", user.uid);
-
     const userDoc = await adminDb
       .collection("admins")
       .doc(user.uid)
       .get();
-
-    console.log("Document Exists:", userDoc.exists);
 
     if (!userDoc.exists) {
       return NextResponse.json(
@@ -33,8 +27,6 @@ export async function GET() {
         { status: 404 }
       );
     }
-
-    console.log("Firestore Data:", userDoc.data());
 
     return NextResponse.json({
       id: userDoc.id,

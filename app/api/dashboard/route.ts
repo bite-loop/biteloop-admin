@@ -13,46 +13,55 @@ export async function GET() {
       );
     }
 
-    // Total Restaurants
-    const restaurantsSnapshot =
-      await adminDb
+    const restaurantsPromise =
+      adminDb
         .collection("restaurants")
+        .count()
         .get();
 
+    const usersPromise =
+      adminDb
+        .collection("users")
+        .count()
+        .get();
+
+    const notificationsPromise =
+      adminDb
+        .collection("notifications")
+        .orderBy("createdAt", "desc")
+        .limit(5)
+        .get();
+
+    const [
+      restaurantsCount,
+      usersCount,
+      activitySnapshot,
+    ] = await Promise.all([
+      restaurantsPromise,
+      usersPromise,
+      notificationsPromise,
+    ]);
+
     const totalRestaurants =
-      restaurantsSnapshot.size;
+      restaurantsCount.data().count;
 
-      // Total Users
-const usersSnapshot =
-  await adminDb
-    .collection("users")
-    .get();
+    const totalUsers =
+      usersCount.data().count;
 
-const totalUsers =
-  usersSnapshot.size;
+    const recentActivity =
+      activitySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-  // Recent Activity
-const activitySnapshot = await adminDb
-  .collection("notifications")
-  .orderBy("createdAt", "desc")
-  .limit(5)
-  .get();
-
-const recentActivity = activitySnapshot.docs.map((doc) => ({
-  id: doc.id,
-  ...doc.data(),
-}));
-
-return NextResponse.json({
-  success: true,
-
-  stats: {
-    totalUsers,
-    totalRestaurants,
-  },
-
-  recentActivity,
-});
+    return NextResponse.json({
+      success: true,
+      stats: {
+        totalUsers,
+        totalRestaurants,
+      },
+      recentActivity,
+    });
   } catch (error) {
     console.error(error);
 
